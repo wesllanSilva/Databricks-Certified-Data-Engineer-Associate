@@ -9,7 +9,11 @@
 
 -- COMMAND ----------
 
-USE CATALOG hive_metastore
+CREATE CATALOG IF NOT EXISTS demo_prep_associate;
+
+-- COMMAND ----------
+
+USE CATALOG demo_prep_associate;
 
 -- COMMAND ----------
 

@@ -25,12 +25,20 @@ def download_dataset(source, target):
 
 # COMMAND ----------
 
-data_source_uri = "s3://dalhussein-courses/datasets/bookstore/v1/"
-dataset_bookstore = 'dbfs:/mnt/demo-datasets/bookstore'
-data_catalog = 'hive_metastore'
-spark.conf.set(f"dataset.bookstore", dataset_bookstore)
-spark.conf.set("fs.s3a.endpoint", "s3.eu-west-3.amazonaws.com")
-spark.conf.set("fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider")
+# MAGIC %skip
+# MAGIC data_source_uri = "s3://dalhussein-courses/datasets/bookstore/v1/"
+# MAGIC dataset_bookstore = 'dbfs:/mnt/demo-datasets/bookstore'
+# MAGIC data_catalog = 'hive_metastore'
+# MAGIC spark.conf.set(f"dataset.bookstore", dataset_bookstore)
+# MAGIC spark.conf.set("fs.s3a.endpoint", "s3.eu-west-3.amazonaws.com")
+# MAGIC spark.conf.set("fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider")
+# MAGIC
+
+# COMMAND ----------
+
+dataset_bookstore = "/Volumes/demo_prep_associate/demo-datasets/bookstore_data"
+data_catalog = 'demo_prep_associate'
+data_schema = 'demo_datasets'
 
 # COMMAND ----------
 
@@ -46,6 +54,7 @@ def get_index(dir):
 
 def set_current_catalog(catalog_name):
     spark.sql(f"USE CATALOG {catalog_name}")
+    spark.sql(f"USE SCHEMA {data_schema}")
 
 # COMMAND ----------
 
@@ -104,5 +113,5 @@ def load_new_json_data(all=False):
 
 # COMMAND ----------
 
-download_dataset(data_source_uri, dataset_bookstore)
+#download_dataset(data_source_uri, dataset_bookstore)
 set_current_catalog(data_catalog)

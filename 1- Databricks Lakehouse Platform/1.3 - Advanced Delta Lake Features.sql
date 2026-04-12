@@ -5,7 +5,7 @@
 
 -- COMMAND ----------
 
-USE CATALOG hive_metastore
+USE CATALOG demo_prep_associate
 
 -- COMMAND ----------
 
@@ -18,33 +18,50 @@ FROM employees VERSION AS OF 4
 
 -- COMMAND ----------
 
-SELECT * FROM employees@v4
+SELECT * FROM employees@v4;
 
 -- COMMAND ----------
 
-DELETE FROM employees
+DELETE FROM employees;
 
 -- COMMAND ----------
 
-SELECT * FROM employees
+SELECT * FROM employees;
 
 -- COMMAND ----------
 
-RESTORE TABLE employees TO VERSION AS OF 5
+RESTORE TABLE employees TO VERSION AS OF 6;
 
 -- COMMAND ----------
 
-SELECT * FROM employees
+SELECT * FROM employees;
 
 -- COMMAND ----------
 
-DESCRIBE HISTORY employees
+DESCRIBE HISTORY employees;
 
 -- COMMAND ----------
 
 -- MAGIC %md
 -- MAGIC
 -- MAGIC ## OPTIMIZE Command
+
+-- COMMAND ----------
+
+INSERT INTO employees
+VALUES 
+  (7, "Wesllan", 7500.0),
+  (8, "Gabriel", 6020.5);
+
+-- COMMAND ----------
+
+UPDATE employees SET salary = 5000.0 WHERE id = 7;
+
+-- COMMAND ----------
+
+INSERT INTO employees
+VALUES 
+  (9, "Matheus", 9500.0);
 
 -- COMMAND ----------
 

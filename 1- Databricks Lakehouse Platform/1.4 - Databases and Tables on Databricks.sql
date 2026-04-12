@@ -4,7 +4,7 @@
 
 -- COMMAND ----------
 
-USE CATALOG hive_metastore;
+USE CATALOG demo_prep_associate;
 
 CREATE TABLE managed_default
   (width INT, length INT, height INT);

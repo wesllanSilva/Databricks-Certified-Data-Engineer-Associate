@@ -11,8 +11,12 @@
 
 -- COMMAND ----------
 
+SELECT current_catalog(), current_schema()
+
+-- COMMAND ----------
+
 CREATE TABLE orders AS
-SELECT * FROM parquet.`${dataset.bookstore}/orders`
+SELECT * FROM parquet.`/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders`
 
 -- COMMAND ----------
 
@@ -26,7 +30,7 @@ SELECT * FROM orders
 -- COMMAND ----------
 
 CREATE OR REPLACE TABLE orders AS
-SELECT * FROM parquet.`${dataset.bookstore}/orders`
+SELECT * FROM parquet.`/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders`
 
 -- COMMAND ----------
 
@@ -35,7 +39,7 @@ DESCRIBE HISTORY orders
 -- COMMAND ----------
 
 INSERT OVERWRITE orders
-SELECT * FROM parquet.`${dataset.bookstore}/orders`
+SELECT * FROM parquet.`/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders`
 
 -- COMMAND ----------
 
@@ -44,7 +48,7 @@ DESCRIBE HISTORY orders
 -- COMMAND ----------
 
 INSERT OVERWRITE orders
-SELECT *, current_timestamp() FROM parquet.`${dataset.bookstore}/orders`
+SELECT *, current_timestamp() FROM parquet.`/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders`
 
 -- COMMAND ----------
 
@@ -54,7 +58,7 @@ SELECT *, current_timestamp() FROM parquet.`${dataset.bookstore}/orders`
 -- COMMAND ----------
 
 INSERT INTO orders
-SELECT * FROM parquet.`${dataset.bookstore}/orders-new`
+SELECT * FROM parquet.`/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders-new`
 
 -- COMMAND ----------
 
@@ -68,7 +72,7 @@ SELECT count(*) FROM orders
 -- COMMAND ----------
 
 CREATE OR REPLACE TEMP VIEW customers_updates AS 
-SELECT * FROM json.`${dataset.bookstore}/customers-json-new`;
+SELECT * FROM json.`/Volumes/demo_prep_associate/demo_datasets/bookstore_data/customers-json-new`;
 
 MERGE INTO customers c
 USING customers_updates u
@@ -83,12 +87,16 @@ CREATE OR REPLACE TEMP VIEW books_updates
    (book_id STRING, title STRING, author STRING, category STRING, price DOUBLE)
 USING CSV
 OPTIONS (
-  path = "${dataset.bookstore}/books-csv-new",
+  path = "/Volumes/demo_prep_associate/demo_datasets/bookstore_data/books-csv-new",
   header = "true",
   delimiter = ";"
 );
 
 SELECT * FROM books_updates
+
+-- COMMAND ----------
+
+select * from books
 
 -- COMMAND ----------
 
