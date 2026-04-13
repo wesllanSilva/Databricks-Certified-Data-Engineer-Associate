@@ -31,14 +31,13 @@ display(files)
 (spark.readStream
     .format("cloudFiles")
     .option("cloudFiles.format", "parquet")
-    .option("cloudFiles.schemaLocation", "dbfs:/mnt/demo/checkpoints/orders_raw")
+    .option("cloudFiles.schemaLocation", "/Volumes/demo_prep_associate/demo_datasets/demo_checkpoints/orders_raw")
     .load(f"{dataset_bookstore}/orders-raw")
     .createOrReplaceTempView("orders_raw_temp"))
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC
 # MAGIC ## Enriching Raw Data
 
 # COMMAND ----------
@@ -64,7 +63,7 @@ display(files)
 (spark.table("orders_tmp")
       .writeStream
       .format("delta")
-      .option("checkpointLocation", "dbfs:/mnt/demo/checkpoints/orders_bronze")
+      .option("checkpointLocation", "/Volumes/demo_prep_associate/demo_datasets/bookstore_data//orders_bronze")
       .outputMode("append")
       .table("orders_bronze"))
 
@@ -122,7 +121,7 @@ load_new_data()
 (spark.table("orders_enriched_tmp")
       .writeStream
       .format("delta")
-      .option("checkpointLocation", "dbfs:/mnt/demo/checkpoints/orders_silver")
+      .option("checkpointLocation", "/Volumes/demo_prep_associate/demo_datasets/bookstore_data//orders_silver")
       .outputMode("append")
       .table("orders_silver"))
 
@@ -166,7 +165,7 @@ load_new_data()
       .writeStream
       .format("delta")
       .outputMode("complete")
-      .option("checkpointLocation", "dbfs:/mnt/demo/checkpoints/daily_customer_books")
+      .option("checkpointLocation", "/Volumes/demo_prep_associate/demo_datasets/bookstore_data//daily_customer_books")
       .trigger(availableNow=True)
       .table("daily_customer_books"))
 

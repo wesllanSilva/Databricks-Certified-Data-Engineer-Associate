@@ -132,7 +132,7 @@ SELECT * FROM orders_enriched
 -- COMMAND ----------
 
 CREATE OR REPLACE TEMP VIEW orders_updates
-AS SELECT * FROM parquet.`${dataset.bookstore}/orders-new`;
+AS SELECT * FROM parquet.`/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders-new`;
 
 SELECT * FROM orders 
 UNION 

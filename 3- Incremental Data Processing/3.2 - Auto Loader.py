@@ -17,7 +17,7 @@
 
 # COMMAND ----------
 
-files = dbutils.fs.ls(f"{dataset_bookstore}/orders-raw")
+files = dbutils.fs.ls("/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders-raw")
 display(files)
 
 # COMMAND ----------
@@ -31,10 +31,10 @@ display(files)
 (spark.readStream
         .format("cloudFiles")
         .option("cloudFiles.format", "parquet")
-        .option("cloudFiles.schemaLocation", "dbfs:/mnt/demo/orders_checkpoint")
-        .load(f"{dataset_bookstore}/orders-raw")
+        .option("cloudFiles.schemaLocation", "/Volumes/demo_prep_associate/demo_datasets/demo_checkpoints/orders_checkpoint")
+        .load("/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders-raw")
       .writeStream
-        .option("checkpointLocation", "dbfs:/mnt/demo/orders_checkpoint")
+        .option("checkpointLocation", "/Volumes/demo_prep_associate/demo_datasets/demo_checkpoints/orders_checkpoint")
         .table("orders_updates")
 )
 
@@ -60,7 +60,7 @@ load_new_data()
 
 # COMMAND ----------
 
-files = dbutils.fs.ls(f"{dataset_bookstore}/orders-raw")
+files = dbutils.fs.ls("/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders-raw")
 display(files)
 
 # COMMAND ----------
@@ -92,4 +92,4 @@ display(files)
 
 # COMMAND ----------
 
-dbutils.fs.rm("dbfs:/mnt/demo/orders_checkpoint", True)
+dbutils.fs.rm("/Volumes/demo_prep_associate/demo_datasets/demo_checkpoints/orders_checkpoint", True)

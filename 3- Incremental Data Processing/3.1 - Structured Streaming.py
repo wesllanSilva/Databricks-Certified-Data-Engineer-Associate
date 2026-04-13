@@ -75,12 +75,13 @@
 
 # COMMAND ----------
 
-(spark.table("author_counts_tmp_vw")                               
+(spark.table("author_counts_tmp_vw")
       .writeStream  
       .trigger(processingTime='4 seconds')
       .outputMode("complete")
-      .option("checkpointLocation", "dbfs:/mnt/demo/author_counts_checkpoint")
+      .option("checkpointLocation", "/Volumes/demo_prep_associate/demo_datasets/demo_checkpoints/author_counts_checkpoint")
       .table("author_counts")
+      
 )
 
 # COMMAND ----------
@@ -121,7 +122,7 @@
       .writeStream           
       .trigger(availableNow=True)
       .outputMode("complete")
-      .option("checkpointLocation", "dbfs:/mnt/demo/author_counts_checkpoint")
+      .option("checkpointLocation", "/Volumes/demo_prep_associate/demo_datasets/demo_checkpoints/author_counts_checkpoint")
       .table("author_counts")
       .awaitTermination()
 )

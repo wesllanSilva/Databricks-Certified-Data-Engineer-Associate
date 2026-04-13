@@ -14,7 +14,7 @@
 
 -- COMMAND ----------
 
-SET datasets.path=dbfs:/mnt/demo-datasets/bookstore;
+SET datasets.path=/Volumes/demo_prep_associate/demo_datasets/bookstore_data;
 
 -- COMMAND ----------
 

@@ -36,7 +36,7 @@ def download_dataset(source, target):
 
 # COMMAND ----------
 
-dataset_bookstore = "/Volumes/demo_prep_associate/demo-datasets/bookstore_data"
+dataset_bookstore = "/Volumes/demo_prep_associate/demo_datasets/bookstore_data"
 data_catalog = 'demo_prep_associate'
 data_schema = 'demo_datasets'
 
