@@ -35,6 +35,7 @@ display(files)
         .load("/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders-raw")
       .writeStream
         .option("checkpointLocation", "/Volumes/demo_prep_associate/demo_datasets/demo_checkpoints/orders_checkpoint")
+        .trigger(availableNow=True)
         .table("orders_updates")
 )
 

@@ -14,7 +14,11 @@
 
 -- COMMAND ----------
 
-SET datasets.path=/Volumes/demo_prep_associate/demo_datasets/bookstore_data;
+-- MAGIC %run ../Includes/Copy-Datasets
+
+-- COMMAND ----------
+
+SET datasets.path=dbfs:/mnt/demo-datasets/bookstore;
 
 -- COMMAND ----------
 
@@ -30,7 +34,7 @@ SET datasets.path=/Volumes/demo_prep_associate/demo_datasets/bookstore_data;
 
 CREATE OR REFRESH STREAMING LIVE TABLE orders_raw
 COMMENT "The raw books orders, ingested from orders-raw"
-AS SELECT * FROM cloud_files("${datasets.path}/orders-json-raw", "json",
+AS SELECT * FROM cloud_files("/Volumes/demo_prep_associate/demo_datasets/bookstore_data/orders-json-raw", "json",
                              map("cloudFiles.inferColumnTypes", "true"))
 
 -- COMMAND ----------

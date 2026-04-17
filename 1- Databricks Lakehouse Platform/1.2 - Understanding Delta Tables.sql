@@ -73,6 +73,7 @@ DESCRIBE DETAIL employees
 
 -- COMMAND ----------
 
+-- MAGIC %skip
 -- MAGIC %fs ls 'dbfs:/user/hive/warehouse/employees'
 
 -- COMMAND ----------
@@ -92,6 +93,7 @@ SELECT * FROM employees
 
 -- COMMAND ----------
 
+-- MAGIC %skip
 -- MAGIC %fs ls 'dbfs:/user/hive/warehouse/employees'
 
 -- COMMAND ----------
@@ -118,7 +120,3 @@ DESCRIBE HISTORY employees
 -- COMMAND ----------
 
 -- MAGIC %fs head 'dbfs:/user/hive/warehouse/employees/_delta_log/00000000000000000005.json'
-
--- COMMAND ----------
-
-

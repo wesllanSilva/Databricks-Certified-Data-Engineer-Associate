@@ -87,13 +87,14 @@ SELECT * FROM csv.`/Volumes/demo_prep_associate/demo_datasets/bookstore_data/boo
 
 -- COMMAND ----------
 
-
-CREATE TABLE books_csv
-USING csv
-OPTIONS (
-  header = "true",
-  delimiter = ";"
-)LOCATION "/Volumes/demo_prep_associate/demo_datasets/bookstore_data/books-csv"
+-- MAGIC %skip
+-- MAGIC -- LOCATION não é suportado no databricks free edition sem conta cloud(ex:azure)
+-- MAGIC CREATE TABLE books_csv
+-- MAGIC USING csv
+-- MAGIC OPTIONS (
+-- MAGIC   header = "true",
+-- MAGIC   delimiter = ";"
+-- MAGIC )LOCATION "/Volumes/demo_prep_associate/demo_datasets/bookstore_data/books-csv"
 
 -- COMMAND ----------
 
